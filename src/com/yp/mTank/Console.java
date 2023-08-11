@@ -11,8 +11,10 @@ public class Console extends JFrame {
 
     public Console() {
         mPanel = new MPanel();
+        new Thread(mPanel).start();
         this.setSize(1000, 750);
         this.add(mPanel);
+        this.addKeyListener(mPanel);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
