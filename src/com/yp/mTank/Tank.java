@@ -27,7 +27,7 @@ public class Tank {
                 }
                 break;
             case 1:
-                if (y + speed < 750) {
+                if (y + 60 + speed < 750) {
                     this.direction = 1;
                     y += speed;
                 }
@@ -39,7 +39,7 @@ public class Tank {
                 }
                 break;
             case 3:
-                if (x + speed < 1000) {
+                if (x + 60 + speed < 1000) {
                     this.direction = 3;
                     x += speed;
                 }
@@ -67,7 +67,4 @@ public class Tank {
         this.type = type;
     }
 
-    public void setDirection(int direction) {
-        this.direction = direction;
-    }
 }

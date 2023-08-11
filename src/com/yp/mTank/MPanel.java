@@ -12,14 +12,16 @@ import java.util.Vector;
  */
 public class MPanel extends JPanel implements KeyListener, Runnable {
     int eNum = 4;
-    MTank mTank = null;
-    Vector<ETank> eTanks = new Vector<>();
+    MTank mTank;
+    Vector<ETank> eTanks;
 
     public MPanel() {
         //初始化敌方坦克
         eTanks = initETanks(eNum);
+        //启动敌方坦克
+        startETanks(eTanks);
         //初始化我方坦克
-        mTank = new MTank(350, 400, 0);
+        mTank = new MTank(450, 600, 0);
 
     }
 
@@ -76,27 +78,12 @@ public class MPanel extends JPanel implements KeyListener, Runnable {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     //初始化敌方坦克方法
     public Vector<ETank> initETanks(int eNum) {
         Vector<ETank> eTanks = new Vector<>();
         ETank eTank;
         for (int i = 0; i < eNum; i++) {
-            eTank = new ETank(150 * i + 100, 100, 1);
+            eTank = new ETank(200 * i + 150, 100, 1);
             eTanks.add(eTank);
         }
         return eTanks;
@@ -106,17 +93,24 @@ public class MPanel extends JPanel implements KeyListener, Runnable {
     public void drawETanks(Graphics g, Vector<ETank> eTanks) {
         if (eTanks == null) return;
 
-        ETank eTank;
-        for (int i = 0; i < eTanks.size(); i++) {
-            eTank = eTanks.get(i);
+        for (ETank eTank : eTanks) {
             drawTank(g, eTank.getX(), eTank.getY(),
                     eTank.getDirection(), eTank.getType());
         }
     }
 
+    //启动敌方坦克方法
+    public void startETanks(Vector<ETank> eTanks) {
+        if (eTanks == null) return;
+
+        for (ETank eTank : eTanks) {
+            new Thread(eTank).start();
+        }
+    }
+
     //画我方坦克方法
     public void drawMTank(Graphics g, MTank mTank) {
-        drawTank(g, mTank.getX(),mTank.getY(),
+        drawTank(g, mTank.getX(), mTank.getY(),
                 mTank.getDirection(), mTank.getType());
     }
 
