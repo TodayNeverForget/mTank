@@ -1,2 +1,0 @@
-# mTank
-Java TankGame Project
